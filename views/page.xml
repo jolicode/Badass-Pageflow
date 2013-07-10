@@ -1,0 +1,3 @@
+<Alloy>
+    <View id="container" class="com.jolicode.pageflow.page"  />
+</Alloy>

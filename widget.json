@@ -1,0 +1,13 @@
+{
+	"id": "com.jolicode.pageflow",
+	"name": "com.jolicode.pageflow",
+	"description" : "allows to manage flows of pages",
+	"author": "jolicode.com",
+	"version": "0.1",
+	"copyright":"Copyright JoliCode 2013",
+	"license":"MIT",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"2.1",
+	"tags":"",
+	"platforms":"android,blackberry,ios,mobileweb"
+}

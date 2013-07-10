@@ -1,0 +1,22 @@
+"#navBar": {
+    backgroundColor: '#FFFF',
+    height: 44,
+    top: 0
+},
+"#center": {
+    backgroundColor: 'transparent',
+    height: Ti.UI.FILL,
+    width: Ti.UI.SIZE
+},
+"#left": {
+    backgroundColor: 'transparent',
+    height: Ti.UI.FILL,
+    left: 0,
+    width: Ti.UI.SIZE
+},
+"#right": {
+    backgroundColor: 'transparent',
+    height: Ti.UI.FILL,
+    right: 0,
+    width: Ti.UI.SIZE
+}
