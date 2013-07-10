@@ -57,25 +57,28 @@ Creating a new pageflow is done in two steps:
 
  * and populate the pageflow with a first page (in `index.js`):
 
-
-        $.pageFlow.addChild({
-            arguments: { products: selectedItems },
-            controller: 'cart/productsList',
-            backButton: {
-                backgroundImage: '/images/button/back-green.png',
-                left: 10
-            },
-            navBar: {
-                backgroundColor: '#F5F5F9',
-                right: 'cart/navBarRight'
-            }
-        });
+    ```js
+    $.pageFlow.addChild({
+        arguments: { products: selectedItems },
+        controller: 'cart/productsList',
+        backButton: {
+            backgroundImage: '/images/button/back-green.png',
+            left: 10
+        },
+        navBar: {
+            backgroundColor: '#F5F5F9',
+            right: 'cart/navBarRight'
+        }
+    });
+    ```
 
 
 In order to be able to add Child views to the pageflow in an other controller, you may want to reference the pageflow from using `Alloy.Globals`:
 
 
-    Alloy.Globals.pageFlow = $.pageflow;
+```js
+Alloy.Globals.pageFlow = $.pageflow;
+```
 
 
 Each child in the pageflow may have several properties:
@@ -94,7 +97,9 @@ Each child in the pageflow may have several properties:
 
 Closing a page of the pageflow is done using the `back()` method:
 
-    Alloy.Globals.pageFlow.back();
+```js
+Alloy.Globals.pageFlow.back();
+```
 
 
 #### Programatically moving the pageflow
@@ -102,8 +107,10 @@ Closing a page of the pageflow is done using the `back()` method:
 You may also want to go back to a specific page of the pageflow, which is possible by passing its index to the `gotoPage()` method:
 
 
-    // say we are on the page 4
-    Alloy.Globals.pageFlow.gotoPage(2);
+```js
+// say we are on the page 4
+Alloy.Globals.pageFlow.gotoPage(2);
+```
 
 
 #### Closing a pageflow
@@ -111,7 +118,9 @@ You may also want to go back to a specific page of the pageflow, which is possib
 It may happen that, after completing a workflow, you simply want to close a pageflow in order to got back to the previous layer of windows/views. In order to do so, use the `clear()` method, which will clear all the pages of the window (and call a specific `remoeveEventListeners()` method on each page controller, if it exists) and close the pageflow parent window:
 
 
-        Alloy.Globals.pageFlow.clear();
+```js
+Alloy.Globals.pageFlow.clear();
+```
 
 
 #### Retrieving the current page
@@ -153,31 +162,34 @@ Several hooks are available in the page display process. In order to use them, t
 Say you add a child window to a pageflow:
 
 
-    $.pageFlow.addChild({
-        arguments: { url: videoUrl },
-        controller: 'mediaplayer/videoplayer'
-    });
-
+```js
+$.pageFlow.addChild({
+    arguments: { url: videoUrl },
+    controller: 'mediaplayer/videoplayer'
+});
+```
 
 In that case, if the controller `app/controllers/mediaplayer/videoplayer.js` exposes as a public API one or several of these hooks, they will be executed:
 
-    // app/controllers/mediaplayer/videoplayer.js
-    var properties = arguments[0] || {};
+```js
+// app/controllers/mediaplayer/videoplayer.js
+var properties = arguments[0] || {};
 
-    // do several things
-    $.videoPlayer.url = properties.videoUrl;
+// do several things
+$.videoPlayer.url = properties.videoUrl;
 
-    // ...
+// ...
 
-    // stop the video player before hiding the view
-    exports.preHide = function() {
-        $.videoPlayer.stop();
-    }
+// stop the video player before hiding the view
+exports.preHide = function() {
+    $.videoPlayer.stop();
+};
 
-    // start the video once the page is displayed
-    exports.postShow: function() {
-        $.videoPlayer.play();
-    },
+// start the video once the page is displayed
+exports.postShow = function() {
+    $.videoPlayer.play();
+};
+```
 
 
 ### Removing event listeners
@@ -185,9 +197,11 @@ In that case, if the controller `app/controllers/mediaplayer/videoplayer.js` exp
 Your application may use custom event listeners, attached to the `Ti.App` namespace. For instance:
 
 
-    Ti.App.addEventListener('com.acme.whatever', function() {
-        alert('The "com.acme.whatever" event happened !');
-    });
+```js
+Ti.App.addEventListener('com.acme.whatever', function() {
+    alert('The "com.acme.whatever" event happened !');
+});
+```
 
 
 If the user opens the page defining this event listener more than one time, the handler will be executed several times (the number of times this page has been displayed). In that case, the alert window would be displayed more than once. this is of course a bad behavior that you wouldn't want to see.
@@ -195,18 +209,20 @@ If the user opens the page defining this event listener more than one time, the 
 In order to avoid this problem, the page object seeks for a rpublic method `removeEventListeners()` in the page content controller, in which you may unattach global event listeners:
 
 
-    // initialize the page
-    var handler = function() {
-        alert('The "com.acme.whatever" event happened !');
-    };
-    Ti.App.addEventListener('com.acme.whatever', handler);
-    // ...
+```js
+// initialize the page
+var handler = function() {
+    alert('The "com.acme.whatever" event happened !');
+};
+Ti.App.addEventListener('com.acme.whatever', handler);
+// ...
 
-    // expose a way to unattach global event listeners
-    exports.removeEventListeners = function() {
-        Ti.App.removeEventListener('com.acme.whatever', handler);
-        Ti.App.removeEventListener('com.acme.otherEvent', otherHandler);
-    };
+// expose a way to unattach global event listeners
+exports.removeEventListeners = function() {
+    Ti.App.removeEventListener('com.acme.whatever', handler);
+    Ti.App.removeEventListener('com.acme.otherEvent', otherHandler);
+};
+```
 
 
 ## Styles and customization
