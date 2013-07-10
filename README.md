@@ -80,14 +80,14 @@ In order to be able to add Child views to the pageflow in an other controller, y
 
 Each child in the pageflow may have several properties:
 
- * arguments: the arguments to pass to the page controller, which may be grabbed using the `arguments` var
- * controller: the name of the controller to instantiate
- * backButton: the properties of the back button. You may also set the `navBar.left` property. In order to hide the default displayed back button, simply set the `backButton.hidden` property to `true`
- * navBar: the properties of the navBar:
-   * backgroundColor
-   * right controller
-   * center controller
-   * left controller
+ * `arguments`: the arguments to pass to the page controller, which may be grabbed using the `arguments` var
+ * `controller`: the name of the controller to instantiate
+ * `backButton`: the properties of the back button. You may also set the `navBar.left` property. In order to hide the default displayed back button, simply set the `backButton.hidden` property to `true`
+ * `navBar`: the properties of the navBar:
+   * `backgroundColor`
+   * `right`: name of the controller to load in the right nav button position
+   * `center`: name of the controller to load in the center nav button position
+   * `left`: name of the controller to load in the left nav button position
 
 
 #### Closing the current page of the pageflow
