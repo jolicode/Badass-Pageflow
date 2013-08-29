@@ -65,6 +65,10 @@ var pageflow = {
         pageflow.pagesViews = [];
     },
 
+    countPages: function() {
+        return pageflow.pages.length;
+    },
+
     getCurrentPage: function() {
         return pageflow.getPage(pageflow.pages.length - 1);
     },
@@ -102,6 +106,7 @@ var pageflow = {
 exports.addChild = pageflow.addChild;
 exports.back = pageflow.back;
 exports.clear = pageflow.clear;
+exports.countPages = pageflow.countPages;
 exports.getCurrentPage = pageflow.getCurrentPage;
 exports.getCurrentPageView = pageflow.getCurrentPageView;
 exports.gotoPage = pageflow.gotoPage;

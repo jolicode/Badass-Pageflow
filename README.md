@@ -5,10 +5,12 @@
 
 The [Titanium Alloy](https://github.com/appcelerator/alloy) "Badass Pageflow" widget allows to manage flows of pages: open a child window, go back to the parent window, close the current pageflow, move to a page by its index, etc.
 
+A "Pageflow" is therefore comparable to a [NavigationGroup](http://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.iPhone.NavigationGroup), except it is cross-platform and it allows a greater personnalization.
+
 
 ## Compatibility
 
-The widget has been tested with Alloy 1.2.0.
+The widget has been tested with Alloy 1.3.0
 
 
 ## Install
@@ -129,6 +131,11 @@ You may want to access the current page of a pageflow. In order to do so, two me
 
  * `getCurrentPage()` returns the current page's controller
  * `getCurrentPageView()` returns the current page's view, which may be useful to inject UI elements in it.
+
+
+#### Counting pages
+
+The `countPages()` method allows to get the size of the pageflow, ie. the number of pages contained in the pageflow.
 
 
 ### Page object
