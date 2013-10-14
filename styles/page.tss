@@ -1,5 +1,5 @@
 "#container": {
     backgroundColor: 'transparent',
     layout: 'vertical',
-    width: Ti.Platform.displayCaps.platformWidth
+    width: Alloy.Globals.jolicode.pageflow.width
 }

@@ -41,6 +41,24 @@ Then, declare the dependency in the `app/config.json` file:
     }
 
 
+## Configuration and getting started
+
+The widget works even when the android anyDensity property is set to false. In order to achieve this, please add the following lines on top of you `alloy.js` file:
+
+
+```js
+Alloy.Globals.jolicode = {};
+Alloy.Globals.jolicode.pageflow = {};
+Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight;
+Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth;
+
+if (OS_ANDROID) {
+    Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight / Ti.Platform.displayCaps.logicalDensityFactor;
+    Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth / Ti.Platform.displayCaps.logicalDensityFactor;
+}
+```
+
+
 ## Public API and examples
 
 The pageflow widget exposes a public API, which allows to manipulate barely every aspect of the pageflow, the page content or the navigation bar.

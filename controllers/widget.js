@@ -22,10 +22,10 @@ var pageflow = {
         var newPageView = newPage.getView();
         pageflow.pages.push(newPage);
         pageflow.pagesViews.push(newPageView);
-        $.pageflow.width = pageflow.pages.length * Ti.Platform.displayCaps.platformWidth;
+        $.pageflow.width = pageflow.pages.length * Alloy.Globals.jolicode.pageflow.width;
         $.pageflow.add(newPageView);
 
-        var left = (1 - pageflow.pages.length) * Ti.Platform.displayCaps.platformWidth;
+        var left = (1 - pageflow.pages.length) * Alloy.Globals.jolicode.pageflow.width;
 
         if (pageflow.pages.length > 1) {
             $.pageflow.animate({ left: left, duration: 200 }, function() {
@@ -44,7 +44,7 @@ var pageflow = {
     },
 
     back: function() {
-        var left = (2 - pageflow.pages.length) * Ti.Platform.displayCaps.platformWidth;
+        var left = (2 - pageflow.pages.length) * Alloy.Globals.jolicode.pageflow.width;
         pageflow.pages[pageflow.pages.length - 1].preHide();
 
         if (pageflow.pages.length >= 2) {
@@ -91,17 +91,23 @@ var pageflow = {
         }
     },
 
+    initialize: function() {
+        $.pageflow.height = Alloy.Globals.jolicode.pageflow.height;
+    },
+
     removeLastPage: function() {
-        var left = (2 - pageflow.pages.length) * Ti.Platform.displayCaps.platformWidth;
+        var left = (2 - pageflow.pages.length) * Alloy.Globals.jolicode.pageflow.width;
         $.pageflow.left = left;
         var remove = pageflow.pages.pop();
         remove.removeEventListeners();
         var removeView = pageflow.pagesViews.pop();
         $.pageflow.remove(removeView);
-        $.pageflow.width = pageflow.pages.length * Ti.Platform.displayCaps.platformWidth;
+        $.pageflow.width = pageflow.pages.length * Alloy.Globals.jolicode.pageflow.width;
     }
 };
 
+
+pageflow.initialize();
 
 exports.addChild = pageflow.addChild;
 exports.back = pageflow.back;
