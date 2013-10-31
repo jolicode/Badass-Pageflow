@@ -5,7 +5,7 @@
 
 The [Titanium Alloy](https://github.com/appcelerator/alloy) "Badass Pageflow" widget allows to manage flows of pages: open a child window, go back to the parent window, close the current pageflow, move to a page by its index, etc.
 
-A "Pageflow" is therefore comparable to a [NavigationGroup](http://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.iPhone.NavigationGroup), except it is cross-platform and it allows a greater personnalization.
+A "Pageflow" is therefore comparable to a [NavigationGroup](http://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.iPhone.NavigationGroup), except it is cross-platform and it allows a greater personnalization. In particular, the Pageflow widget allows to translate in every direction, and not only on a horizontal path.
 
 
 ## Compatibility
@@ -23,7 +23,7 @@ Simply drop the widget's content in the folder `app/widgets/com.jolicode.pageflo
 
 
     "dependencies": {
-        "com.jolicode.pageflow": "1.0"
+        "com.jolicode.pageflow": "1.1"
     }
 
 
@@ -37,7 +37,7 @@ Then, declare the dependency in the `app/config.json` file:
 
 
     "dependencies": {
-        "com.jolicode.pageflow": "1.0"
+        "com.jolicode.pageflow": "1.1"
     }
 
 
@@ -88,6 +88,10 @@ Creating a new pageflow is done in two steps:
         navBar: {
             backgroundColor: '#F5F5F9',
             right: 'cart/navBarRight'
+        },
+        direction: {
+            top: .5,
+            left: 1
         }
     });
     ```
@@ -111,6 +115,9 @@ Each child in the pageflow may have several properties:
    * `right`: name of the controller to load in the right nav button position
    * `center`: name of the controller to load in the center nav button position
    * `left`: name of the controller to load in the left nav button position
+ * `direction`: the direction in which the new child should be opened:
+   * `top`: +1 for one screen below, -1 for one screen upper, 0 for an horizontal path. You may use floating values
+   * `left`: +1 for one screen on the right, -1 for one screen on the left, 0 for a vertical transition. You may use floating values
 
 
 #### Closing the current page of the pageflow
@@ -275,7 +282,11 @@ This widget is made available by [JoliCode](http://jolicode.com/) under the MIT 
 
 ## Changelog
 
+### 1.1 - 2013-10-31
+
+ * added the possibility to open child views in every direction, not only on a horizontal path
+
 ### 1.0 - 2013-07-10
 
  * initial release of the widget
- * features pageflows management and customisation
+ * features pageflows management and customization

@@ -3,7 +3,7 @@
 	"name": "com.jolicode.pageflow",
 	"description" : "allows to manage flows of pages. aka better and cross-platform navigationGroup",
 	"author": "jolicode.com",
-	"version": "1.0",
+	"version": "1.1",
 	"copyright":"Copyright JoliCode 2013",
 	"license":"MIT",
 	"min-alloy-version": "1.0",

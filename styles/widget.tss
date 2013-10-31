@@ -1,6 +1,5 @@
 "#pageflow": {
     backgroundColor: 'transparent',
-    layout: "horizontal",
     left: 0,
     top: 0,
     width:0

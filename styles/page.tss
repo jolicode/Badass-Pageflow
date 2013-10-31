@@ -1,5 +1,6 @@
 "#container": {
     backgroundColor: 'transparent',
+    height: Alloy.Globals.jolicode.pageflow.height,
     layout: 'vertical',
     width: Alloy.Globals.jolicode.pageflow.width
 }
