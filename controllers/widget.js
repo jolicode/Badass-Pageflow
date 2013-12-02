@@ -227,6 +227,7 @@ var pageflow = {
 
     gotoPage: function(page) {
         var first = true;
+
         while (pageflow.pages.length > page + 1) {
             pageflow.removeLastPage(first, pageflow.pages.length == page + 2);
             first = false;
@@ -237,20 +238,34 @@ var pageflow = {
         $.pageflow.height = Alloy.Globals.jolicode.pageflow.height;
     },
 
+    /**
+     * Removes the last page of the pageflow.
+     *
+     * @param boolean callPrePostHide indicates whether the pre/post mixins of the removed view must be called
+     * @param boolean callPrePostHide indicates whether the pre/post mixins of the previous view, if it exists, must be called
+     */
     removeLastPage: function(callPrePostHide, callPrePostShow) {
         var remove = pageflow.pages.pop();
         remove.removeEventListeners();
-        if (callPrePostHide)
+
+        if (callPrePostHide) {
             remove.preHide();
+        }
+
         var removeView = pageflow.pagesViews.pop();
         $.pageflow.remove(removeView);
         pageflow.pagesGridPositions.pop();
-        if (callPrePostHide)
+
+        if (callPrePostHide) {
             remove.postHide();
+        }
 
         var currentPage = pageflow.getCurrentPage();
-        if (callPrePostShow && currentPage)
+
+        if (callPrePostShow && currentPage) {
             currentPage.preShow();
+        }
+
         // move the grid to adapt its new dimensions
         var currentPageId = pageflow.getCurrentPageId();
         var currentPosition = pageflow.getGridCoordinatesForPage(currentPageId);
@@ -264,8 +279,10 @@ var pageflow = {
         var gridDimensions = pageflow.getGridDimensions();
         $.pageflow.width = gridDimensions.width;
         $.pageflow.height = gridDimensions.height;
-        if (callPrePostShow && currentPage)
+
+        if (callPrePostShow && currentPage){
             currentPage.postShow();
+        }
     }
 };
 
