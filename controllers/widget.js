@@ -82,22 +82,25 @@ var pageflow = {
         var previousPage = pageflow.getPreviousPage();
 
         if (previousPage) {
-            pageflow.getCurrentPage().preHide();
-            previousPage.preShow();
             var currentPosition = pageflow.getGridCoordinatesForPage(pageflow.getCurrentPageId() - 1);
 
             $.pageflow.animate({ left: currentPosition.left, top: currentPosition.top, duration: 300 }, function() {
                 $.pageflow.left = currentPosition.left;
                 $.pageflow.top = currentPosition.top;
-                pageflow.removeLastPage();
+                pageflow.removeLastPage(true, true);
             });
         }
     },
 
     clear: function() {
+        var currentPage = pageflow.getCurrentPage();
+        if (currentPage)
+            currentPage.preHide();
         $.pageflow.width = 0;
         $.pageflow.height = 0;
         $.pageflow.removeAllChildren();
+        if (currentPage)
+            currentPage.postHide();
 
         pageflow.pages = [];
         pageflow.pagesViews = [];
@@ -223,8 +226,10 @@ var pageflow = {
     },
 
     gotoPage: function(page) {
+        var first = true;
         while (pageflow.pages.length > page + 1) {
-            pageflow.removeLastPage();
+            pageflow.removeLastPage(first, pageflow.pages.length == page + 2);
+            first = false;
         }
     },
 
@@ -232,13 +237,20 @@ var pageflow = {
         $.pageflow.height = Alloy.Globals.jolicode.pageflow.height;
     },
 
-    removeLastPage: function() {
+    removeLastPage: function(callPrePostHide, callPrePostShow) {
         var remove = pageflow.pages.pop();
         remove.removeEventListeners();
+        if (callPrePostHide)
+            remove.preHide();
         var removeView = pageflow.pagesViews.pop();
         $.pageflow.remove(removeView);
         pageflow.pagesGridPositions.pop();
+        if (callPrePostHide)
+            remove.postHide();
 
+        var currentPage = pageflow.getCurrentPage();
+        if (callPrePostShow && currentPage)
+            currentPage.preShow();
         // move the grid to adapt its new dimensions
         var currentPageId = pageflow.getCurrentPageId();
         var currentPosition = pageflow.getGridCoordinatesForPage(currentPageId);
@@ -252,6 +264,8 @@ var pageflow = {
         var gridDimensions = pageflow.getGridDimensions();
         $.pageflow.width = gridDimensions.width;
         $.pageflow.height = gridDimensions.height;
+        if (callPrePostShow && currentPage)
+            currentPage.postShow();
     }
 };
 
