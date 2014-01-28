@@ -7,6 +7,9 @@ The [Titanium Alloy](https://github.com/appcelerator/alloy) "Badass Pageflow" wi
 
 A "Pageflow" is therefore comparable to a [NavigationGroup](http://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.iPhone.NavigationGroup), except it is cross-platform and it allows a greater personnalization. In particular, the Pageflow widget allows to translate in every direction, and not only on a horizontal path.
 
+## Demo
+
+[Watch the video on Youtube](http://www.youtube.com/watch?v=kwnS2c9_z9U)
 
 ## Compatibility
 

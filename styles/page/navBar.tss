@@ -1,4 +1,4 @@
-"#navBar": {
+".com.jolicode.pageflow.navBar": {
     backgroundColor: '#FFFF',
     height: 44,
     top: 0
