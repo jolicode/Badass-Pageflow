@@ -10,7 +10,14 @@ var pageflow = {
     // sample values can be: (-1, 0), (2, 1), etc.
     pagesGridPositions: [],
 
+    // prevent concurrency issues
+    locked: false,
+
     addChild: function(properties) {
+        if (pageflow.locked)
+            return;
+        pageflow.locked = true;
+
         // Launch previous Page preHide
         if (pageflow.pages.length >= 1) {
             pageflow.pages[pageflow.pages.length - 1].preHide();
@@ -63,36 +70,45 @@ var pageflow = {
             $.pageflow.animate({ left: currentPosition.left, top: currentPosition.top, duration: 300 }, function() {
                 $.pageflow.left = currentPosition.left;
                 $.pageflow.top = currentPosition.top;
+                newPage.postShow();
+                pageflow.locked = false;
             });
         } else {
             $.pageflow.top = currentPosition.top;
             $.pageflow.left = currentPosition.left;
+            newPage.postShow();
+            pageflow.locked = false;
         }
 
         // Launch previous Page postHide
         if (pageflow.pages.length >= 2) {
             pageflow.pages[pageflow.pages.length - 2].postHide();
         }
-
-        // call the new Page "postShow" hook
-        newPage.postShow();
     },
 
     back: function() {
+        if (pageflow.locked)
+            return;
         var previousPage = pageflow.getPreviousPage();
 
         if (previousPage) {
+            pageflow.locked = true;
             var currentPosition = pageflow.getGridCoordinatesForPage(pageflow.getCurrentPageId() - 1);
 
             $.pageflow.animate({ left: currentPosition.left, top: currentPosition.top, duration: 300 }, function() {
                 $.pageflow.left = currentPosition.left;
                 $.pageflow.top = currentPosition.top;
                 pageflow.removeLastPage(true, true);
+                pageflow.locked = false;
             });
         }
     },
 
     clear: function() {
+        if (pageflow.locked)
+            return;
+        pageflow.locked = true;
+
         var currentPage = pageflow.getCurrentPage();
         if (currentPage)
             currentPage.preHide();
@@ -104,6 +120,8 @@ var pageflow = {
 
         pageflow.pages = [];
         pageflow.pagesViews = [];
+
+        pageflow.locked = false;
     },
 
     /**
@@ -226,12 +244,18 @@ var pageflow = {
     },
 
     gotoPage: function(page) {
+        if (pageflow.locked)
+            return;
+        pageflow.locked = true;
+
         var first = true;
 
         while (pageflow.pages.length > page + 1) {
             pageflow.removeLastPage(first, pageflow.pages.length == page + 2);
             first = false;
         }
+
+        pageflow.locked = false;
     },
 
     initialize: function() {
@@ -245,26 +269,22 @@ var pageflow = {
      * @param boolean callPrePostHide indicates whether the pre/post mixins of the previous view, if it exists, must be called
      */
     removeLastPage: function(callPrePostHide, callPrePostShow) {
+        if (pageflow.pages.length < 2)
+            return;
+
         var remove = pageflow.pages.pop();
         remove.removeEventListeners();
 
-        if (callPrePostHide) {
+        if (callPrePostHide)
             remove.preHide();
-        }
 
         var removeView = pageflow.pagesViews.pop();
-        $.pageflow.remove(removeView);
         pageflow.pagesGridPositions.pop();
-
-        if (callPrePostHide) {
-            remove.postHide();
-        }
 
         var currentPage = pageflow.getCurrentPage();
 
-        if (callPrePostShow && currentPage) {
+        if (callPrePostShow && currentPage)
             currentPage.preShow();
-        }
 
         // move the grid to adapt its new dimensions
         var currentPageId = pageflow.getCurrentPageId();
@@ -280,9 +300,13 @@ var pageflow = {
         $.pageflow.width = gridDimensions.width;
         $.pageflow.height = gridDimensions.height;
 
-        if (callPrePostShow && currentPage){
+        if (callPrePostShow && currentPage)
             currentPage.postShow();
-        }
+
+        $.pageflow.remove(removeView);
+
+        if (callPrePostHide)
+            remove.postHide();
     }
 };
 
