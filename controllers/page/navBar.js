@@ -29,14 +29,6 @@ exports.setTitle = function(title, options) {
     setContent($.center, view, options);
 };
 
-reLayout = function() {
-    if ($.left.content || $.right.content) {
-        $.center.width = Ti.UI.SIZE;
-    } else {
-        $.center.width = Ti.UI.SIZE;
-    }
-};
-
 setContent = function(container, view, options) {
     options = options || {};
 
@@ -79,7 +71,6 @@ setContent = function(container, view, options) {
     }
 
     container.content = view;
-    reLayout();
 };
 
 if (properties.left) {

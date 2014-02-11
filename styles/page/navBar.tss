@@ -3,18 +3,19 @@
     height: 44,
     top: 0
 },
-"#center": {
+".com.jolicode.pageflow.navBar.center": {
     backgroundColor: 'transparent',
     height: Ti.UI.FILL,
-    width: Ti.UI.SIZE
+    left: 50,
+    right: 50
 },
-"#left": {
+".com.jolicode.pageflow.navBar.left": {
     backgroundColor: 'transparent',
     height: Ti.UI.FILL,
     left: 0,
     width: Ti.UI.SIZE
 },
-"#right": {
+".com.jolicode.pageflow.navBar.right": {
     backgroundColor: 'transparent',
     height: Ti.UI.FILL,
     right: 0,
