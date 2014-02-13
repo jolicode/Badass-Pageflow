@@ -39,7 +39,7 @@ setContent = function(container, view, options) {
     if (null !== view) {
         if (typeof view === 'string') {
             // view must be created
-            var view = Alloy.createController(view).getView();
+            var view = Alloy.createController(view, options).getView();
         }
 
         // set some basic properties
