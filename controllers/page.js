@@ -14,6 +14,11 @@ if (!properties.navBarHidden) {
 properties.arguments = properties.arguments || {};
 properties.arguments.containingPage = $.container;
 
+if (properties.containerProperties) {
+    $.container.height = properties.containerProperties.height || Alloy.Globals.jolicode.pageflow.height;
+    $.container.width = properties.containerProperties.width || Alloy.Globals.jolicode.pageflow.width;
+}
+
 var pageController = Alloy.createController(properties.controller, properties.arguments);
 var pageContent = pageController.getView();
 $.container.add(pageContent);
