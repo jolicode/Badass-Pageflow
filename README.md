@@ -166,6 +166,31 @@ You may want to access the current page of a pageflow. In order to do so, two me
 The `countPages()` method allows to get the size of the pageflow, ie. the number of pages contained in the pageflow.
 
 
+#### Replace a page
+
+The `replacePage()` method allows to replace the page at a certain position of the pageflow. Say you are on the page 3, and want to replace the content of the page 2. Juste call `replacePage()` and it will build the new page content, remove the old one and replace it with the new one:
+
+```js
+Alloy.Globals.pageFlow.replacePage(
+    2, // here the id of the page to be changed
+    {
+        arguments: { products: selectedItems },
+        controller: 'cart/productsList',
+        backButton: {
+            backgroundImage: '/images/button/back-green.png',
+            left: 10
+        },
+        navBar: {
+            backgroundColor: '#F5F5F9',
+            right: 'cart/navBarRight'
+        }
+    }
+);
+```
+
+This will not change the coordinates of the page in the pageflow (which is currently not possible), but it will replace its content.
+
+
 ### Page object
 
 A pageflow is made of `Pages`, which display the content of your application. Each page contains a NavBar (optionnaly hidden) and a content zone, which displays the `controller` passed to the pageflow `addChild()` method.
@@ -178,6 +203,7 @@ Pages feature the following methods:
  * `getNavBar`: returns the navBar object, which allows to manipulate the navigation bar
  * `hideNavBar`: hides the navbar
  * `removeEventListeners`: clears the event listeners defined in the page content. This may be useful to remove event listeners associated to the Ti.App namespace (see "Removing event listeners" below)
+ * `replace`: replaces the page content. Takes as argument the same like the `addChild` method
  * `setNavCenter`: sets the navBar center item. Pass `null` to clear the navBar center content
  * `setNavLeft`: sets the navBar left item. Pass `null` to clear the navBar left content
  * `setNavRight`: sets the navBar right item. Pass `null` to clear the navBar right content
@@ -284,6 +310,14 @@ This widget is made available by [JoliCode](http://jolicode.com/) under the MIT 
  * more personnalization
 
 ## Changelog
+
+### master
+
+ * added a `replacePage()` method, which allows to replace the content of a page at a certain position
+
+### 1.3 - 2014-02-19
+
+ * have the widget pages be more configurable
 
 ### 1.1 - 2013-10-31
 
