@@ -300,10 +300,10 @@ var pageflow = {
         $.pageflow.width = gridDimensions.width;
         $.pageflow.height = gridDimensions.height;
 
+        $.pageflow.remove(removeView);
+
         if (callPrePostShow && currentPage)
             currentPage.postShow();
-
-        $.pageflow.remove(removeView);
 
         if (callPrePostHide)
             remove.postHide();
