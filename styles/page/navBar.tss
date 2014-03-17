@@ -12,11 +12,13 @@
     backgroundColor: 'transparent',
     height: Ti.UI.FILL,
     left: 0,
+    top: 0,
     width: Ti.UI.SIZE
 },
 "#right": {
     backgroundColor: 'transparent',
     height: Ti.UI.FILL,
     right: 0,
+    top: 0,
     width: Ti.UI.SIZE
 }
