@@ -1,3 +1,5 @@
 <Alloy>
-    <Button id="button" class="com.jolicode.pageflow.backButton" />
+	<View id="clickZoneBack" class="com.jolicode.pageflow.clickZoneBack" >
+	    <Button id="button" class="com.jolicode.pageflow.backButton" />
+	</View>
 </Alloy>
