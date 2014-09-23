@@ -56,9 +56,18 @@ Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight;
 Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth;
 
 if (OS_ANDROID) {
-    Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight / Ti.Platform.displayCaps.logicalDensityFactor;
+    Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight / Ti.Platform.displayCaps.logicalDensityFactor - 25;
     Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth / Ti.Platform.displayCaps.logicalDensityFactor;
 }
+
+Ti.Gesture.addEventListener 'orientationchange', (e) ->
+    Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight;
+    Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth;
+
+    if (OS_ANDROID) {
+        Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight / Ti.Platform.displayCaps.logicalDensityFactor - 25;
+        Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth / Ti.Platform.displayCaps.logicalDensityFactor;
+    }
 ```
 
 
