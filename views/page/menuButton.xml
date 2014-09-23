@@ -1,0 +1,5 @@
+<Alloy>
+    <View id="view">
+        <Button id="menuButton" class="com.jolicode.pageflow.menuButton" />
+    </View>
+</Alloy>

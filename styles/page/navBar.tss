@@ -1,23 +1,63 @@
+/*
+ * NAVBAR
+ */
 ".com.jolicode.pageflow.navBar": {
-    backgroundColor: '#FFFF',
-    height: 44,
+    backgroundColor: '#f28D35',
     top: 0
-},
-".com.jolicode.pageflow.navBar.center": {
-    backgroundColor: 'transparent',
-    height: Ti.UI.FILL,
-    left: 50,
-    right: 50
-},
-".com.jolicode.pageflow.navBar.left": {
-    backgroundColor: 'transparent',
-    height: Ti.UI.FILL,
+}
+    ".com.jolicode.pageflow.navBar[platform=ios]": {
+        height: 44 // menuBar
+    }
+    ".com.jolicode.pageflow.navBar[platform=ios if=Alloy.Globals.isIos7Plus]" : {
+        height: 64 // compensate for the status bar on iOS 7
+    }
+    ".com.jolicode.pageflow.navBar[platform=android]": {
+        height: 48 // actionBar
+    }
+
+/*
+ * NAVBAR CONTENT
+ */
+".com.jolicode.pageflow.navBar.content": {
+    backgroundColor: '#f2b035',
     left: 0,
-    width: Ti.UI.SIZE
-},
-".com.jolicode.pageflow.navBar.right": {
-    backgroundColor: 'transparent',
     height: Ti.UI.FILL,
-    right: 0,
-    width: Ti.UI.SIZE
+    color: '#fff'
+}
+    ".com.jolicode.pageflow.navBar.left": {
+        left: 0,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.FILL,
+        backgroundColor: 'transparent'
+    }
+    ".com.jolicode.pageflow.navBar.center": {
+        left: 48,
+        right: 48,
+        height: Ti.UI.FILL,
+        backgroundColor: 'transparent'
+    }
+    ".com.jolicode.pageflow.navBar.right": {
+        right: 0,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.FILL,
+        backgroundColor: 'transparent'
+    }
+
+/*
+ * NAVBAR CONTENT IOS
+ */
+".com.jolicode.pageflow.navBar.content[platform=ios if=Alloy.Globals.isIos7Plus]": {
+    top: 20
+}
+
+/*
+ * NAVBAR ANDROID
+ */
+".com.jolicode.pageflow.navBar.left[platform=android]": {
+    left: 0
+}
+".com.jolicode.pageflow.navBar.center[platform=android]": {
+    width: Ti.UI.SIZE,
+    left: 48,
+    textAlign: 'left'
 }

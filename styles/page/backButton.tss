@@ -1,0 +1,11 @@
+".com.jolicode.pageflow.backButton": {
+  backgroundImage: '/images/button-back.png'
+}
+".com.jolicode.pageflow.backButton[platform=android]": {
+  width: 48,
+  height: 48
+}
+".com.jolicode.pageflow.backButton[platform=ios]": {
+  width: 44,
+  height: 44
+}

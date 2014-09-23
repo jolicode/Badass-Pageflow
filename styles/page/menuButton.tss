@@ -1,0 +1,11 @@
+".com.jolicode.pageflow.menuButton": {
+    backgroundImage: '/images/button-burger.png'
+}
+".com.jolicode.pageflow.menuButton[platform=android]": {
+    width: 48,
+    height: 48,
+}
+".com.jolicode.pageflow.menuButton[platform=ios]": {
+    width: 44,
+    height: 44,
+}
