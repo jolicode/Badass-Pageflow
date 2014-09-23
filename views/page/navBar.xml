@@ -1,9 +1,13 @@
 <Alloy>
     <View id="navBar" class="com.jolicode.pageflow.navBar">
 
-        <View id="button" class="com.jolicode.pageflow.navBar.content">
-            <View id="left" class="com.jolicode.pageflow.navBar.left" />
-            <View id="center" class="com.jolicode.pageflow.navBar.center" />
+        <View class="com.jolicode.pageflow.navBar.content">
+            <View id="contentLeft" class="com.jolicode.pageflow.navBar.content.left" platform="android">
+                <View id="left" class="com.jolicode.pageflow.navBar.left" />
+                <View id="center" class="com.jolicode.pageflow.navBar.center" />
+            </View>
+            <View id="left" class="com.jolicode.pageflow.navBar.left" platform="ios" />
+            <View id="center" class="com.jolicode.pageflow.navBar.center" platform="ios" />
             <View id="right" class="com.jolicode.pageflow.navBar.right" />
         </View>
 

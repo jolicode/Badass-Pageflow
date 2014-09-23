@@ -31,8 +31,6 @@
         backgroundColor: 'transparent'
     }
     ".com.jolicode.pageflow.navBar.center": {
-        left: 48,
-        right: 48,
         height: Ti.UI.FILL,
         backgroundColor: 'transparent'
     }
@@ -49,15 +47,26 @@
 ".com.jolicode.pageflow.navBar.content[platform=ios if=Alloy.Globals.isIos7Plus]": {
     top: 20
 }
+".com.jolicode.pageflow.navBar.center[platform=ios]": {
+    left: 48,
+    right: 48
+}
 
 /*
  * NAVBAR ANDROID
  */
+".com.jolicode.pageflow.navBar.content.left[platform=android]" : {
+    layout: 'horizontal',
+    top: 0,
+    left: 0,
+    right: 48,
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL
+}
 ".com.jolicode.pageflow.navBar.left[platform=android]": {
     left: 0
 }
 ".com.jolicode.pageflow.navBar.center[platform=android]": {
     width: Ti.UI.SIZE,
-    left: 48,
     textAlign: 'left'
 }

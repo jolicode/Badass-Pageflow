@@ -297,12 +297,9 @@ var pageflow = {
         }
     },
 
-<<<<<<< HEAD
     /**
      * Reset dimensions pageflow
      */
-=======
->>>>>>> 9a4595b485c88b3271a14f985cb4ccde0184b38a
     resetDimensions: function() {
         // move the grid to adapt its new dimensions
         var currentPageId = pageflow.getCurrentPageId();
@@ -317,11 +314,7 @@ var pageflow = {
         var gridDimensions = pageflow.getGridDimensions();
         $.pageflow.width = gridDimensions.width;
         $.pageflow.height = gridDimensions.height;
-<<<<<<< HEAD
     }
-=======
-    },
->>>>>>> 9a4595b485c88b3271a14f985cb4ccde0184b38a
 };
 
 // initialize stuff
