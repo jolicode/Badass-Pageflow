@@ -3,7 +3,7 @@
     "name": "com.jolicode.pageflow",
     "description" : "Allows to manage flows of pages: open a child window, go back to the parent window, close the current pageflow, move to a page by its index, etc. It is therefore comparable to a NavigationGroup, except it is cross-platform and it allows a greater personnalization. In particular, the Pageflow widget allows to translate in every direction, and not only on a horizontal path.",
     "author": "jolicode.com",
-    "version": "1.3",
+    "version": "1.4",
     "copyright":"Copyright JoliCode",
     "license":"MIT",
     "min-alloy-version": "1.0",

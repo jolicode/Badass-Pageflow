@@ -11,6 +11,10 @@ A "Pageflow" is therefore comparable to a [NavigationGroup](http://docs.appceler
 
 [Watch the video on Youtube](http://www.youtube.com/watch?v=kwnS2c9_z9U)
 
+## Now you are two different layout
+
+![Layouts](http://s29.postimg.org/ta89pj1iv/two_layout.jpg)
+
 ## Compatibility
 
 The widget has been tested with Alloy 1.3.0
@@ -26,7 +30,7 @@ Simply drop the widget's content in the folder `app/widgets/com.jolicode.pageflo
 
 
     "dependencies": {
-        "com.jolicode.pageflow": "1.1"
+        "com.jolicode.pageflow": "1.4"
     }
 
 
@@ -59,6 +63,8 @@ if (OS_ANDROID) {
     Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight / Ti.Platform.displayCaps.logicalDensityFactor - 25;
     Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth / Ti.Platform.displayCaps.logicalDensityFactor;
 }
+
+Alloy.Globals.isIos7Plus = OS_IOS && parseInt(Ti.Platform.version.split(".")[0]) >= 7;
 
 Ti.Gesture.addEventListener 'orientationchange', (e) ->
     Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight;
@@ -108,9 +114,30 @@ Creating a new pageflow is done in two steps:
     });
     ```
 
+Android options:
+ * menu:
+
+    ```js
+    $.pageFlow.addChild({
+        arguments: { products: selectedItems },
+        controller: 'cart/productsList',
+        navBar: {
+            title: 'Homepage',
+            left: 'buttons/burgerButton',
+            leftOptions: {
+                menuButton: true
+            }
+        }
+    });
+    ```
+If you are on iOS, this options are disabled, there isn't compatibility problem.
+You can add a `leftOptions: { menuButton: true }` to setup a little button animation.
+![Android left-button](http://s18.postimg.org/asy3vboft/left_button.jpg)
+If you don't have any left button or if you need space between the left side and the title, you can add `androidTitleOptions: { marginLeft: 14 }`
+![Android margin-left](http://s27.postimg.org/eisx0nur7/margin_left.jpg)
+
 
 In order to be able to add Child views to the pageflow in an other controller, you may want to reference the pageflow from using `Alloy.Globals`:
-
 
 ```js
 Alloy.Globals.pageFlow = $.pageflow;

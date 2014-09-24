@@ -114,12 +114,10 @@ if (OS_ANDROID) {
             $.center.left = 32;
         }
     }
-}
 
-var toggleMenu = function() {
-    if (OS_ANDROID) {
-        if (properties.leftOptions) {
-            if (properties.leftOptions.menuButton) {
+    if (properties.leftOptions) {
+        if (properties.leftOptions.menuButton) {
+            var toggleMenuButton = function() {
                 if (menuIsOpen){
                     moveTo = -16;
                     menuIsOpen = false;
@@ -131,18 +129,11 @@ var toggleMenu = function() {
                     left: moveTo,
                     curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
                     duration: 200
-                });
-                $.center.animate({
-                    right: moveTo,
-                    curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
-                    duration: 200
                 })
             }
+            $.left.addEventListener('click', function(){
+                toggleMenuButton();
+            })
         }
     }
 }
-
-Ti.App.addEventListener('pageflow.menubutton', function(){
-    console.log('pageflow.menubutton');
-    toggleMenu();
-})
