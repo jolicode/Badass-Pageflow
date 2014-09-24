@@ -7,13 +7,18 @@ The [Titanium Alloy](https://github.com/appcelerator/alloy) "Badass Pageflow" wi
 
 A "Pageflow" is therefore comparable to a [NavigationGroup](http://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.iPhone.NavigationGroup), except it is cross-platform and it allows a greater personnalization. In particular, the Pageflow widget allows to translate in every direction, and not only on a horizontal path.
 
+
 ## Demo
 
 [Watch the video on Youtube](http://www.youtube.com/watch?v=kwnS2c9_z9U)
+[Test a demo](https://github.com/vdesdoigts/Demo-Badass-Pageflow)
 
-## Now you are two different layout
+## Crossplatform
 
-![Layouts](http://s29.postimg.org/ta89pj1iv/two_layout.jpg)
+![Android and iOS layouts](http://s29.postimg.org/ta89pj1iv/two_layout.jpg)
+
+The "Badass Pageflow" widget allows automatically two different layout, but a single controller for both.
+
 
 ## Compatibility
 
@@ -44,7 +49,7 @@ Then, declare the dependency in the `app/config.json` file:
 
 
     "dependencies": {
-        "com.jolicode.pageflow": "1.1"
+        "com.jolicode.pageflow": "1.4"
     }
 
 
@@ -54,26 +59,24 @@ The widget works even when the android anyDensity property is set to false. In o
 
 
 ```js
+Alloy.Globals.isIos7Plus = OS_IOS && parseInt(Ti.Platform.version.split(".")[0]) >= 7;
 Alloy.Globals.jolicode = {};
 Alloy.Globals.jolicode.pageflow = {};
 Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight;
 Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth;
-
 if (OS_ANDROID) {
     Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight / Ti.Platform.displayCaps.logicalDensityFactor - 25;
     Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth / Ti.Platform.displayCaps.logicalDensityFactor;
 }
 
-Alloy.Globals.isIos7Plus = OS_IOS && parseInt(Ti.Platform.version.split(".")[0]) >= 7;
-
-Ti.Gesture.addEventListener 'orientationchange', (e) ->
+Ti.Gesture.addEventListener('orientationchange', function(e) {
     Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight;
     Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth;
-
     if (OS_ANDROID) {
         Alloy.Globals.jolicode.pageflow.height = Ti.Platform.displayCaps.platformHeight / Ti.Platform.displayCaps.logicalDensityFactor - 25;
         Alloy.Globals.jolicode.pageflow.width = Ti.Platform.displayCaps.platformWidth / Ti.Platform.displayCaps.logicalDensityFactor;
     }
+})
 ```
 
 
@@ -114,30 +117,9 @@ Creating a new pageflow is done in two steps:
     });
     ```
 
-Android options:
- * menu:
-
-    ```js
-    $.pageFlow.addChild({
-        arguments: { products: selectedItems },
-        controller: 'cart/productsList',
-        navBar: {
-            title: 'Homepage',
-            left: 'buttons/burgerButton',
-            leftOptions: {
-                menuButton: true
-            }
-        }
-    });
-    ```
-If you are on iOS, this options are disabled, there isn't compatibility problem.
-You can add a `leftOptions: { menuButton: true }` to setup a little button animation.
-![Android left-button](http://s18.postimg.org/asy3vboft/left_button.jpg)
-If you don't have any left button or if you need space between the left side and the title, you can add `androidTitleOptions: { marginLeft: 14 }`
-![Android margin-left](http://s27.postimg.org/eisx0nur7/margin_left.jpg)
-
 
 In order to be able to add Child views to the pageflow in an other controller, you may want to reference the pageflow from using `Alloy.Globals`:
+
 
 ```js
 Alloy.Globals.pageFlow = $.pageflow;
@@ -333,6 +315,58 @@ The widget uses several class names which allows to personnalize its look and fe
  * com.jolicode.pageflow.navBar.center
  * com.jolicode.pageflow.navBar.left
  * com.jolicode.pageflow.navBar.right
+
+ * don't forget to enabled this option in `tiapp.xml` for orientation change behavior on iOS:
+
+    ```js
+    <fullscreen>true</fullscreen>
+    <navbar-hidden>true</navbar-hidden>
+    ```
+
+ * on Android, you have to create a custom theme in `platform/android/res/values/customtheme.xml`, to hide the native ActionBar:
+
+    ```js
+    <?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <style name="Theme.Bootstrap" parent="@style/Theme.AppCompat">
+            <!-- Depending on the parent theme, this may be called android:windowActionBar instead of windowActionBar -->
+            <item name="android:windowActionBar">false</item>
+            <item name="android:windowNoTitle">true</item>
+        </style>
+
+        <style name="Theme.Bootstrap.Translucent" parent="@style/Theme.AppCompat.Translucent">
+            <!-- Depending on the parent theme, this may be called android:windowActionBar instead of windowActionBar -->
+            <item name="android:windowActionBar">false</item>
+            <item name="android:windowNoTitle">true</item>
+        </style>
+    </resources>
+    ```
+ * after that, add this lines in `tiapp.xml`. Plus, they are essential to the orientation behavior:
+
+    ```js
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest android:installLocation="auto" android:versionCode="10" android:versionName="2.0.2">
+            <application android:theme="@style/Theme.Bootstrap">
+                <activity android:configChanges="keyboardHidden|orientation" android:label="Bootstrap" android:name=".BootstrapActivity" android:theme="@style/Theme.Titanium">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                </activity>
+                <activity android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiActivity" />
+                <activity android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiTranslucentActivity" android:theme="@style/Theme.Bootstrap.Translucent" />
+                <activity android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiModalActivity" android:theme="@style/Theme.Bootstrap.Translucent" />
+            </application>
+            <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="16" />
+            <uses-permission android:name="android.permission.SET_ORIENTATION" />
+        </manifest>
+    </android>
+    ```
+
+## Android options
+
+ * `leftOptions: { menuButton: true }`: setup a little button animation, characteristically on the android menu button
+ * `androidTitleOptions: { marginLeft: 14 }`: setup margin left to the title element.
 
 
 ## License and credits
