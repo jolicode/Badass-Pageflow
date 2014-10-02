@@ -343,7 +343,7 @@ On Android, you have to create a custom theme in `platform/android/res/values/cu
         </style>
     </resources>
     ```
- * after that, add this lines in `tiapp.xml`. Plus, they are essential to the orientation behavior:
+After that, add this lines in `tiapp.xml`. Plus, they are essential to the orientation behavior:
 
     ```js
     <android xmlns:android="http://schemas.android.com/apk/res/android">
@@ -383,7 +383,10 @@ This widget is made available by [JoliCode](http://jolicode.com/) under the MIT 
 
 ## Changelog
 
-### master
+### 1.4
+ * added crossplatform layout and orientation change behavior
+
+### 1.3.1
 
  * added a `replacePage()` method, which allows to replace the content of a page at a certain position
 
