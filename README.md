@@ -316,14 +316,16 @@ The widget uses several class names which allows to personnalize its look and fe
  * com.jolicode.pageflow.navBar.left
  * com.jolicode.pageflow.navBar.right
 
- * don't forget to enabled this option in `tiapp.xml` for orientation change behavior on iOS:
+### tiapp.xml
+Don't forget to enabled this option in `tiapp.xml` for orientation change behavior on iOS:
 
     ```js
     <fullscreen>true</fullscreen>
     <navbar-hidden>true</navbar-hidden>
     ```
 
- * on Android, you have to create a custom theme in `platform/android/res/values/customtheme.xml`, to hide the native ActionBar:
+### Android custom theme
+On Android, you have to create a custom theme in `platform/android/res/values/customtheme.xml`, to hide the native ActionBar:
 
     ```js
     <?xml version="1.0" encoding="utf-8"?>
