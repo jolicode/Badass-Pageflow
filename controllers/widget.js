@@ -296,10 +296,33 @@ var pageflow = {
             page.replace(properties);
         }
     },
+
+    /**
+     * Reset dimensions pageflow
+     */
+    resetDimensions: function() {
+        // move the grid to adapt its new dimensions
+        var currentPageId = pageflow.getCurrentPageId();
+        var currentPosition = pageflow.getGridCoordinatesForPage(currentPageId);
+        $.pageflow.top = currentPosition.top;
+        $.pageflow.left = currentPosition.left;
+
+        // move all the page views
+        _.each(pageflow.pagesViews, pageflow.fixPagePosition);
+
+        // fix grid size
+        var gridDimensions = pageflow.getGridDimensions();
+        $.pageflow.width = gridDimensions.width;
+        $.pageflow.height = gridDimensions.height;
+    }
 };
 
 // initialize stuff
 pageflow.initialize();
+
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+    pageflow.resetDimensions();
+});
 
 // expose widget's public API
 exports.addChild = pageflow.addChild;

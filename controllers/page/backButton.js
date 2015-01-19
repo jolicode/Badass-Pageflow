@@ -4,7 +4,7 @@ _.each(properties.properties, function(value, key) {
     $.button[key] = value;
 });
 
-$.button.title = properties.properties.title || L('back');
+$.button.title = properties.properties.title;
 $.button.addEventListener('click', properties.properties.callback || function(e) {
     properties.pageflow.back();
 });

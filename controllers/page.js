@@ -145,6 +145,11 @@ var api = {
 
 api.initialize(args);
 
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+    $.container.height = Alloy.Globals.jolicode.pageflow.height;
+    $.container.width = Alloy.Globals.jolicode.pageflow.width;
+});
+
 exports.clearNavRight = api.clearNavRight;
 exports.getContent = api.getContent;
 exports.getNavBar = api.getNavBar;

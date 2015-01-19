@@ -136,3 +136,44 @@ if (properties.backgroundColor) {
 if (properties.backgroundImage) {
     exports.setBackgroundImage(properties.backgroundImage);
 }
+
+
+
+var menuIsOpen = false;
+
+if (OS_ANDROID) {
+    if (properties.androidTitleOptions) {
+        if (properties.androidTitleOptions.marginLeft) {
+            $.center.left = properties.androidTitleOptions.marginLeft;
+        }
+    }
+    if (properties.left && properties.leftOptions) {
+        if (properties.leftOptions.menuButton) {
+            $.contentLeft.layout = 'composite',
+            $.left.left = -16;
+            $.center.left = 32;
+        }
+    }
+
+    if (properties.leftOptions) {
+        if (properties.leftOptions.menuButton) {
+            var toggleMenuButton = function() {
+                if (menuIsOpen){
+                    moveTo = -16;
+                    menuIsOpen = false;
+                } else{
+                    moveTo = -22;
+                    menuIsOpen = true;
+                }
+                $.left.animate({
+                    left: moveTo,
+                    curve : Ti.UI.ANIMATION_CURVE_EASE_OUT,
+                    duration: 200
+                })
+            }
+            $.left.addEventListener('click', function(){
+                toggleMenuButton();
+            })
+        }
+    }
+}
