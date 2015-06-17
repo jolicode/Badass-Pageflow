@@ -28,8 +28,16 @@ exports.getRightContent = function() {
     return exports.getContent('right');
 };
 
+exports.removeCenterContent = function() {
+    setContent('center', null);
+};
+
+exports.removeLeftContent = function() {
+    setContent('left', null);
+};
+
 exports.removeRightContent = function() {
-    setContent($.right, null);
+    setContent('right', null);
 };
 
 exports.setColor = function(color) {
@@ -49,11 +57,11 @@ exports.getCenter = function() {
 };
 
 exports.setCenterContent = function(view, options) {
-    setContent($.center, view, options);
+    setContent('center', view, options);
 };
 
 exports.setLeftContent = function(view, options) {
-    setContent($.left, view, options);
+    setContent('left', view, options);
 };
 
 exports.getLeft = function() {
@@ -61,7 +69,7 @@ exports.getLeft = function() {
 };
 
 exports.setRightContent = function(view, options) {
-    setContent($.right, view, options);
+    setContent('right', view, options);
 };
 
 exports.getRight = function() {
@@ -70,10 +78,11 @@ exports.getRight = function() {
 
 exports.setTitle = function(title, options) {
     var view = Widget.createController('page/title', title).getView();
-    setContent($.center, view, options);
+    setContent('center', view, options);
 };
 
-setContent = function(container, view, options) {
+setContent = function(containerName, view, options) {
+    container = containers[containerName];
     options = options || {};
 
     if (container.content) {
@@ -83,7 +92,10 @@ setContent = function(container, view, options) {
     if (null !== view) {
         if (typeof view === 'string') {
             // view must be created
-            var view = Alloy.createController(view, options).getView();
+            controllers[containerName] = Alloy.createController(view, options);
+            var view = controllers[containerName].getView();
+        } else {
+            controllers[containerName] = null;
         }
 
         // set some basic properties

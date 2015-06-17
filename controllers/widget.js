@@ -308,5 +308,7 @@ exports.clear = pageflow.clear;
 exports.countPages = pageflow.countPages;
 exports.getCurrentPage = pageflow.getCurrentPage;
 exports.getCurrentPageView = pageflow.getCurrentPageView;
+exports.getPage = pageflow.getPage;
+exports.getPageView = pageflow.getPageView;
 exports.gotoPage = pageflow.gotoPage;
 exports.replacePage = pageflow.replacePage;

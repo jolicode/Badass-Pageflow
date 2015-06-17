@@ -44,6 +44,18 @@ var api = {
         return api.navBar;
     },
 
+    getNavCenter: function() {
+        return api.navBar.getCenterContent();
+    },
+
+    getNavLeft: function() {
+        return api.navBar.getLeftContent();
+    },
+
+    getNavRight: function() {
+        return api.navBar.getRightContent();
+    },
+
     hideNavBar: function() {
         api.pageView.setTop(0);
     },
@@ -137,6 +149,9 @@ exports.clearNavRight = api.clearNavRight;
 exports.getContent = api.getContent;
 exports.getNavBar = api.getNavBar;
 exports.hideNavBar = api.hideNavBar;
+exports.getNavCenter = api.getNavCenter;
+exports.getNavLeft = api.getNavLeft;
+exports.getNavRight = api.getNavRight;
 exports.preHide = api.preHide;
 exports.postHide = api.postHide;
 exports.preShow = api.preShow;
