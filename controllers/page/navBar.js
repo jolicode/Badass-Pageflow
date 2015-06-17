@@ -1,7 +1,39 @@
 var properties = arguments[0] || {};
 
+var containers = {
+    'center': $.center,
+    'right': $.right,
+    'left': $.left
+};
+
+var controllers = {
+    'center': null,
+    'right': null,
+    'left': null
+};
+
+exports.getContent = function(position) {
+    return controllers[position];
+};
+
+exports.getCenterContent = function() {
+    return exports.getContent('center');
+};
+
+exports.getLeftContent = function() {
+    return exports.getContent('left');
+};
+
+exports.getRightContent = function() {
+    return exports.getContent('right');
+};
+
 exports.removeRightContent = function() {
     setContent($.right, null);
+};
+
+exports.setColor = function(color) {
+    $.navBar.color = color;
 };
 
 exports.setBackgroundColor = function(backgroundColor) {
@@ -12,6 +44,10 @@ exports.setBackgroundImage = function(backgroundImage) {
     $.navBar.backgroundImage = backgroundImage;
 };
 
+exports.getCenter = function() {
+    return $.center;
+};
+
 exports.setCenterContent = function(view, options) {
     setContent($.center, view, options);
 };
@@ -20,8 +56,16 @@ exports.setLeftContent = function(view, options) {
     setContent($.left, view, options);
 };
 
+exports.getLeft = function() {
+    return $.left;
+};
+
 exports.setRightContent = function(view, options) {
     setContent($.right, view, options);
+};
+
+exports.getRight = function() {
+    return $.right;
 };
 
 exports.setTitle = function(title, options) {
@@ -75,10 +119,14 @@ setContent = function(container, view, options) {
 
 if (properties.left) {
     exports.setLeftContent(properties.left, properties.leftOptions ? properties.leftOptions : {});
+    exports.getLeftContent();
+    exports.getLeft();
 }
 
 if (properties.right) {
     exports.setRightContent(properties.right, properties.rightOptions ? properties.rightOptions : {});
+    exports.getRightContent();
+    exports.getRight();
 }
 
 if (properties.title) {
@@ -87,6 +135,15 @@ if (properties.title) {
 
 if (properties.center) {
     exports.setCenterContent(properties.center, properties.centerOptions ? properties.centerOptions : {});
+    exports.getCenterContent();
+    exports.getCenter();
+} else {
+    $.center.applyProperties(properties.centerOptions ? properties.centerOptions : {});
+}
+
+
+if (properties.color) {
+    exports.setColor(properties.color);
 }
 
 if (properties.backgroundColor) {
